@@ -18,6 +18,7 @@
 				"extensionId": "ms-dotnettools.csharp",
 				"path": "C:\\Program Files\\dotnet\\dotnet.exe"
 			}
-		]
+		],
+		"dotnet.defaultSolution": "RazorPagesMovie/RazorPagesMovie.sln"
 	}
 }

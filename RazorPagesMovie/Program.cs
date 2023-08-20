@@ -12,6 +12,37 @@ logger.Debug("init main");
 try
 {
     var builder = WebApplication.CreateBuilder(args);
+
+    var startup = new Startup(builder.Configuration);
+    startup.ConfigureServices(builder.Services);
+
+    builder.Logging.ClearProviders();
+    builder.Host.UseNLog();
+    builder.Services.AddDbContext<RazorPagesMovieContext>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("RazorPagesMovieContext") ?? throw new InvalidOperationException("Connection string 'RazorPagesMovieContext' not found.")));
+
+    var app = builder.Build();
+    startup.ConfigureSeedData(app);
+    startup.Configure(app, builder.Environment);
+    app.Run();
+}
+catch (Exception exception)
+{
+    // NLog: catch setup errors
+    logger.Error(exception, "Stopped program because of exception");
+    throw;
+}
+finally
+{
+    // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
+    NLog.LogManager.Shutdown();
+}
+
+#region Obsoleted
+#if false
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
     // Add services to the container.
     builder.Services.AddRazorPages();
 
@@ -76,3 +107,5 @@ finally
     // Ensure to flush and stop internal timers/threads before application-exit (Avoid segmentation fault on Linux)
     NLog.LogManager.Shutdown();
 }
+#endif
+#endregion

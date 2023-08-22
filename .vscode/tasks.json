@@ -1,0 +1,63 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "copy_debug",
+            "command":"xcopy",
+            "type": "shell",
+            "args": [
+                "/E",
+                "/Y",
+                "\"${workspaceFolder}\\RazorPagesMovie/assets\"",
+                "\"${workspaceFolder}\\RazorPagesMovie/bin/Debug/net7.0/assets/\""
+            ],
+        },
+        {
+            "label": "copy_release",
+            "command":"xcopy",
+            "type": "shell",
+            "args": [
+                "/E",
+                "/Y",
+                "\"${workspaceFolder}\\RazorPagesMovie/assets\"",
+                "\"${workspaceFolder}\\RazorPagesMovie/bin/Release/net7.0/assets/\""
+            ]
+        },
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/RazorPagesMovie/RazorPagesMovie.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/RazorPagesMovie/RazorPagesMovie.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": "$msCompile",
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/RazorPagesMovie/RazorPagesMovie.sln"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace RazorPagesMovie.Pages.Admin
+namespace RazorPagesMovie.Pages.Auth
 {
-    public class IndexModel : PageModel
+    public class LoginModel : PageModel
     {
         public void OnGet()
         {
